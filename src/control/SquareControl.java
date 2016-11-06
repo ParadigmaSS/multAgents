@@ -8,18 +8,16 @@ import model.Square.SquareEventListener;
 
 public class SquareControl implements SquareEventListener {
 
-	public static final int ROW_NUMBER = 8;
-	public static final int COL_NUMBER = 8;
+	public static final int ROW_NUMBER = 20;
+	public static final int COL_NUMBER = 20;
 
 	public static final Color DEFAULT_COLOR_ONE = Color.WHITE;
-	public static final Color DEFAULT_COLOR_TWO = Color.GRAY;
 	public static final Color DEFAULT_COLOR_HOVER = Color.BLUE;
 	public static final Color DEFAULT_COLOR_SELECTED = Color.GREEN;
 
 	public static final Square EMPTY_SQUARE = null;
 
 	private Color colorOne;
-	private Color colorTwo;
 	private Color colorHover;
 	private Color colorSelected;
 
@@ -27,14 +25,13 @@ public class SquareControl implements SquareEventListener {
 	private ArrayList<Square> squareList;
 
 	public SquareControl() {
-		this(DEFAULT_COLOR_ONE, DEFAULT_COLOR_TWO, DEFAULT_COLOR_HOVER,
+		this(DEFAULT_COLOR_ONE, DEFAULT_COLOR_HOVER,
 				DEFAULT_COLOR_SELECTED);
 	}
 
-	public SquareControl(Color colorOne, Color colorTwo, Color colorHover,
+	public SquareControl(Color colorOne, Color colorHover,
 			Color colorSelected) {
 		this.colorOne = colorOne;
-		this.colorTwo = colorTwo;
 		this.colorHover = colorHover;
 		this.colorSelected = colorSelected;
 
@@ -86,11 +83,7 @@ public class SquareControl implements SquareEventListener {
 	}
 
 	public Color getGridColor(int row, int col) {
-		if ((row + col) % 2 == 0) {
 			return this.colorOne;
-		} else {
-			return this.colorTwo;
-		}
 	}
 
 	private void addSquare() {

@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import model.Square;
 import model.Square.SquareChangeListener;
-import util.ImageHandler;
 import util.SquareMouseAdapter;
 
 public class SquarePanel extends JPanel implements SquareChangeListener {

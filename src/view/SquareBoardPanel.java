@@ -27,11 +27,10 @@ public class SquareBoardPanel extends JPanel {
 
 	private void initializeSquareControl() {
 		Color colorOne = Color.WHITE;
-		Color colorTwo = Color.GRAY;
 		Color colorHover = Color.BLUE;
 		Color colorSelected = Color.GREEN;
 
-		this.squareControl = new SquareControl(colorOne, colorTwo, colorHover,
+		this.squareControl = new SquareControl(colorOne, colorHover,
 				colorSelected);
 	}
 
