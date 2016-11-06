@@ -114,16 +114,16 @@ public class SquareControl implements SquareEventListener {
 	}
 
 	private void moveContentOfSelectedSquare(Square square) {
-		square.setImagePath(this.selectedSquare.getImagePath());
-		this.selectedSquare.removeImage();
+		//square.setImagePath(this.selectedSquare.getImagePath());
+		//this.selectedSquare.removeImage();
 		unselectSquare(square);
 	}
 
 	private void selectSquare(Square square) {
-		if (square.haveImagePath()) {
+		//if (square.haveImagePath()) {
 			this.selectedSquare = square;
 			this.selectedSquare.setColor(this.colorSelected);
-		}
+		//}
 	}
 
 	private void unselectSquare(Square square) {

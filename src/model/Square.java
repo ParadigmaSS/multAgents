@@ -28,7 +28,6 @@ public class Square {
 	private Color color;
 	private Integer size;
 	private Point position;
-	private String imagePath;
 
 	private SquareEventListener squareEventListener;
 	private SquareChangeListener squareChangeListener;
@@ -77,16 +76,11 @@ public class Square {
 		this.size = size;
 		this.color = color;
 		this.position = position;
-		this.imagePath = imagePath;
 
 		this.squareEventListener = EMPTY_EVENT_LISTENER;
 	}
 
-	public void removeImage() {
-		this.imagePath = EMPTY_PATH;
-		notifyOnChangeImagePath();
-	}
-
+	
 	public void notifyOnOutEvent() {
 		if (haveSquereEventListener()) {
 			this.squareEventListener.onOutEvent(this);
@@ -127,19 +121,6 @@ public class Square {
 
 	public void setSize(Integer size) {
 		this.size = size;
-	}
-
-	public boolean haveImagePath() {
-		return this.imagePath != EMPTY_PATH;
-	}
-
-	public String getImagePath() {
-		return this.imagePath;
-	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-		notifyOnChangeImagePath();
 	}
 
 	public Color getColor() {
