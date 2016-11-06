@@ -8,8 +8,8 @@ import model.Square.SquareEventListener;
 
 public class SquareControl implements SquareEventListener {
 
-	public static final int ROW_NUMBER = 20;
-	public static final int COL_NUMBER = 20;
+	public static final int ROW_NUMBER = 30;
+	public static final int COL_NUMBER = 30;
 
 	public static final Color DEFAULT_COLOR_ONE = Color.WHITE;
 	public static final Color DEFAULT_COLOR_HOVER = Color.BLUE;

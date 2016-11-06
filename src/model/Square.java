@@ -19,7 +19,7 @@ public class Square {
 		public void onChangeImagePath(Square square);
 	}
 
-	public static final int DEFAULT_SIZE = 32;
+	public static final int DEFAULT_SIZE = 16;
 	public static final String EMPTY_PATH = "";
 	public static final Color DEFAULT_COLOR = Color.WHITE;
 	public static final SquareEventListener EMPTY_EVENT_LISTENER = null;

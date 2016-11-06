@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,6 +33,9 @@ public class SquarePanel extends JPanel implements SquareChangeListener {
 	public void setSquare(Square square) {
 		this.square = square;
 		this.square.setSquareChangeListener(this);
+
+		// Add border to panels.
+		this.setBorder(BorderFactory.createLineBorder(Color.gray));
 		
 		//this.labelIcon.setIcon(ImageHandler.load(square.getImagePath()));
 		setBackground(square.getColor());
