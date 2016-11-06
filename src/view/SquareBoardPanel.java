@@ -23,6 +23,7 @@ public class SquareBoardPanel extends JPanel {
 
 		initializeSquareControl();
 		initializeGrid();
+		initializeCell();
 	}
 
 	private void initializeSquareControl() {
@@ -48,6 +49,8 @@ public class SquareBoardPanel extends JPanel {
 			add(squarePanel, gridBag);
 			this.squarePanelList.add(squarePanel);
 		}
-
+	}
+	private void initializeCell() {
+		this.squareControl.getSquare(15, 15).setColor(Color.black);
 	}
 }
