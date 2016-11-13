@@ -68,7 +68,7 @@ public class SquareControl implements SquareEventListener {
 	public void onOutEvent(Square square) {
 		if (this.selectedSquare != square) {
 			resetColor(square);
-			System.out.println("oi1");
+			System.out.println(square.getCell());
 		} else {
 			System.out.println("oi2");
 			square.setCell();
@@ -90,6 +90,7 @@ public class SquareControl implements SquareEventListener {
 
 	private void addSquare() {
 		Square square = new Square();
+		square.setCell(null);
 		this.squareList.add(square);
 		resetColor(square);
 		resetPosition(square);
@@ -115,9 +116,11 @@ public class SquareControl implements SquareEventListener {
 	}
 
 	private void selectSquare(Square square) {
+		if(square.getCell() == null) {	
 			square.setCell();
 			square.setColor(square.getCell().getColor());
-			this.selectedSquare = square;			
+			this.selectedSquare = square;
+		}
 	}
 
 	private void createSquares() {
