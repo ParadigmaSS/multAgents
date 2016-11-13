@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import model.Cell;
 import model.Square;
 import control.SquareControl;
 
@@ -51,6 +52,10 @@ public class SquareBoardPanel extends JPanel {
 		}
 	}
 	private void initializeCell() {
+		Cell cell = new Cell();
 		this.squareControl.getSquare(15, 15).setColor(Color.black);
+		this.squareControl.getSquare(0,0).setCell(cell);
+		Color teste = this.squareControl.getSquare(0,0).getCell().getColor();
+		this.squareControl.getSquare(0,0).setColor(teste);
 	}
 }

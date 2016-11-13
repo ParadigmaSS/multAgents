@@ -28,12 +28,18 @@ public class Square {
 	private Color color;
 	private Integer size;
 	private Point position;
+	
+	private Cell cell;
 
 	private SquareEventListener squareEventListener;
 	private SquareChangeListener squareChangeListener;
 
 	public Square() {
 		this(0, 0);
+	}
+	
+	public Square(Cell cell) {
+		setCell(cell);
 	}
 
 	public Square(int x, int y) {
@@ -130,6 +136,13 @@ public class Square {
 	public void setColor(Color color) {
 		this.color = color;
 		notifyOnColorChange();
+	}
+	
+	public Cell getCell() {
+		return cell;
+	}
+	public void setCell(Cell cell) {
+		this.cell = cell;
 	}
 
 	public void setSquareEventListener(SquareEventListener squareEventListener) {

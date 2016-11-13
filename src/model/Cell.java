@@ -6,7 +6,7 @@ import java.awt.Point;
 import javax.swing.text.Position;
 
 public class Cell {
-	private Position position;
+	private Point position;
 	private Color color;
 	
 	public Cell() {
@@ -14,14 +14,14 @@ public class Cell {
 		setColor(Color.CYAN);
 	}
 	
-	public Position getPosition() {
+	public Point getPosition() {
 		return position;
 	}
-	public void setPosition(Position position) {
+	public void setPosition(Point position) {
 		this.position = position;
 	}
 	public void setPosition(int x, int y) {
-		this.position = (Position) new Point(x,y);
+		this.position = new Point(x,y);
 	}
 	
 	public Color getColor() {

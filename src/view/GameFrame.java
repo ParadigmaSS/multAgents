@@ -9,7 +9,7 @@ public class GameFrame extends JFrame {
 	private static final long serialVersionUID = -6399886456682347905L;
 
 	public GameFrame() {
-		super("Coin Game");
+		super("Game of Life - Multi Agents");
 
 		initializeScreen();
 	}
