@@ -144,6 +144,10 @@ public class Square {
 	public void setCell(Cell cell) {
 		this.cell = cell;
 	}
+	public void setCell() {
+		Cell emptyCell = new Cell();
+		this.cell = emptyCell;
+	}
 
 	public void setSquareEventListener(SquareEventListener squareEventListener) {
 		this.squareEventListener = squareEventListener;

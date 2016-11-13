@@ -3,6 +3,7 @@ package control;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import model.Cell;
 import model.Square;
 import model.Square.SquareEventListener;
 
@@ -56,9 +57,7 @@ public class SquareControl implements SquareEventListener {
 	public void onSelectEvent(Square square) {
 		if (haveSelectedCellPanel()) {
 			if (!this.selectedSquare.equals(square)) {
-				moveContentOfSelectedSquare(square);
-			} else {
-				unselectSquare(square);
+				insertCell(selectedSquare);
 			}
 		} else {
 			selectSquare(square);
@@ -69,8 +68,11 @@ public class SquareControl implements SquareEventListener {
 	public void onOutEvent(Square square) {
 		if (this.selectedSquare != square) {
 			resetColor(square);
+			System.out.println("oi1");
 		} else {
-			square.setColor(this.colorSelected);
+			System.out.println("oi2");
+			square.setCell();
+			square.setColor(square.getCell().getColor());
 		}
 	}
 
@@ -106,22 +108,16 @@ public class SquareControl implements SquareEventListener {
 		return this.selectedSquare != EMPTY_SQUARE;
 	}
 
-	private void moveContentOfSelectedSquare(Square square) {
-		//square.setImagePath(this.selectedSquare.getImagePath());
-		//this.selectedSquare.removeImage();
-		unselectSquare(square);
+	private void insertCell(Square square) {		
+		square.setCell();
+		square.setColor(square.getCell().getColor());
+		this.selectedSquare = square;
 	}
 
 	private void selectSquare(Square square) {
-		//if (square.haveImagePath()) {
-			this.selectedSquare = square;
-			this.selectedSquare.setColor(this.colorSelected);
-		//}
-	}
-
-	private void unselectSquare(Square square) {
-		resetColor(this.selectedSquare);
-		this.selectedSquare = EMPTY_SQUARE;
+			square.setCell();
+			square.setColor(square.getCell().getColor());
+			this.selectedSquare = square;			
 	}
 
 	private void createSquares() {
