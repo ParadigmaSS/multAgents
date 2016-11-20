@@ -1,16 +1,21 @@
 package gameOfLife;
 
 public class Game {
-	private int width = 9;
-	private int height = 9;
+	private int width;
+	private int height;
 	private char[][] board;
 
-  public Game(int width, int height) {
-    setWidth(width);
-    setHeight(height);
-  }
+	public Game() {
+		setWidth(9);
+		setHeight(9);
+	}
+	
+    public Game(int width, int height) {
+      setWidth(width);
+      setHeight(height);
+    }
 
-  // Print all Board.
+    // Print all Board.
 	public void printBoard() {
 
     // Print index of colums.
@@ -20,7 +25,7 @@ public class Game {
     }
     System.out.println();
 
-    // Print matrix.
+    	// Print matrix.
 		for(int i = 0; i < getWidth(); i++) {
 			// Print index in lines.
 			System.out.print(i + " ");
