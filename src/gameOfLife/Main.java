@@ -8,5 +8,9 @@ public class Main {
     //System.out.println();
     g.initializeBoard();
 		g.printBoard();
+    System.out.println(g.isAlive(0,0));
+    g.insertCell(0,0,true);
+    g.printBoard();
+    System.out.println(g.isAlive(0,0));
 	}
 }
