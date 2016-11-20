@@ -12,5 +12,7 @@ public class Main {
     g.insertCell(0,0,true);
     g.printBoard();
     System.out.println(g.isAlive(0,0));
+    System.out.println(g.checkNeighbors(1,1));
+    System.out.println(g.checkNeighbors(3,3));
 	}
 }

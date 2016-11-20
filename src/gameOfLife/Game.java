@@ -12,7 +12,7 @@ public class Game {
 			System.out.print(1 + " ");
 			for(int j = 0; j < getHeight(); j++) {
         // Get content of board matrix to print it.
-        System.out.print(getSingleSquare(i,j));
+        System.out.print(getCell(i,j));
         System.out.print(" ");
 			}
 			System.out.println(" " + i);
@@ -22,7 +22,7 @@ public class Game {
   // Insert value to an cell, where true is an alive cell and false a dead cell.
   public void insertCell(int x, int y, boolean value) {
     char cell = 'x';
-    cell = getSingleSquare(x,y);
+    cell = getCell(x,y);
     if (value == true) {
       cell = '*';
     } else {
@@ -39,7 +39,7 @@ public class Game {
 	public boolean isAlive(int x, int y) {
 		boolean alive = false;
     char cellValue = 'x';
-    cellValue = getSingleSquare(x,y);
+    cellValue = getCell(x,y);
 
     if(cellValue == '*') {
       alive = true;
@@ -55,6 +55,50 @@ public class Game {
   // Return amount of all alive neighbors of an specific cell.
 	public int checkNeighbors(int x, int y) {
 		int neighborsAmount = 0;
+    boolean verifyCell = false;
+
+    verifyCell = isAlive(x-1,y-1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y-1);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+
+    verifyCell = isAlive(x+1,y-1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
+    verifyCell = isAlive(x-1,y);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+
+    verifyCell = isAlive(x+1,y);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
+    verifyCell = isAlive(x-1,y+1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y+1);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+
+    verifyCell = isAlive(x+1,y+1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
 		return neighborsAmount;
 	}
   
@@ -71,7 +115,7 @@ public class Game {
   }
 
 	// Return a char of an especif position of matrix.
-  public char getSingleSquare(int x, int y) {
+  public char getCell(int x, int y) {
     return this.board[x][y];
   }
   public void setCell(int x, int y, char cell) {
