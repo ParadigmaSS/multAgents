@@ -4,7 +4,6 @@ public class Game {
 	private int width;
 	private int height;
 	private Cell[][] board;
-	//private Cell cell;
 
 	public Game() {
 		setWidth(9);
@@ -19,7 +18,7 @@ public class Game {
 	// Print all Board.
 	public void printBoard() {
 
-		// Print index of colums.
+		// Print index of columns.
 		System.out.print("  ");
 		for(int k=0;k <getWidth();k++) {
 			System.out.print(k + " ");
@@ -37,6 +36,12 @@ public class Game {
 			}
 			System.out.println(i);
 		}
+		// Print index of columns.
+		System.out.print("  ");
+		for(int k=0;k <getWidth();k++) {
+			System.out.print(k + " ");
+		}
+		System.out.println();
 	}
 
 	// Insert value to an cell, where true is an alive cell and false a dead cell.
@@ -97,44 +102,43 @@ public class Game {
 	public int checkNeighbors(int x, int y) {
 		int neighborsAmount = 0;
 		boolean verifyCell = false;
-
-		verifyCell = isAlive(x-1,y-1);
-		if(verifyCell) {
-			neighborsAmount++; 
-		}
-		verifyCell = isAlive(x,y-1);
-		if(verifyCell) {
-			neighborsAmount++;
-		}
-		verifyCell = isAlive(x+1,y-1);
-		if(verifyCell) {
-			neighborsAmount++; 
-		}
-
-		verifyCell = isAlive(x-1,y);
-		if(verifyCell) {
-			neighborsAmount++; 
-		}
-		verifyCell = isAlive(x,y);
-		if(verifyCell) {
-			neighborsAmount++;
-		}
-		verifyCell = isAlive(x+1,y);
-		if(verifyCell) {
-			neighborsAmount++; 
-		}
-
-		verifyCell = isAlive(x-1,y+1);
-		if(verifyCell) {
-			neighborsAmount++; 
-		}
-		verifyCell = isAlive(x,y+1);
-		if(verifyCell) {
-			neighborsAmount++;
-		}
-		verifyCell = isAlive(x+1,y+1);
-		if(verifyCell) {
-			neighborsAmount++; 
+		if((x-1 >= 0 && x+1 <= getWidth()) && (y-1 >= 0 && y+1 <= getHeight())) {
+			verifyCell = isAlive(x-1,y-1);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+			verifyCell = isAlive(x,y-1);
+			if(verifyCell) {
+				neighborsAmount++;
+			}
+			verifyCell = isAlive(x+1,y-1);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+	
+			verifyCell = isAlive(x-1,y);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+			verifyCell = isAlive(x+1,y);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+	
+			verifyCell = isAlive(x-1,y+1);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+			verifyCell = isAlive(x,y+1);
+			if(verifyCell) {
+				neighborsAmount++;
+			}
+			verifyCell = isAlive(x+1,y+1);
+			if(verifyCell) {
+				neighborsAmount++; 
+			}
+		} else {
+			System.out.println("Borda");
 		}
 
 		return neighborsAmount;

@@ -22,14 +22,24 @@ public class Cell extends Agent{
 	public void life() {
 		Game g = new Game();
 		int amount = g.checkNeighbors(getX(), getY());
-		if(amount < 2) {
-			g.insertCell(getX(), getY(), false);
-		} else if(amount == 2 || amount == 3) {
-			g.insertCell(getX(), getY(), true);
-		} else if(amount > 3) {
-			g.insertCell(getX(), getY(), false);
+		if(getValue() == '-') {
+			if(amount == 3) {
+				g.insertCell(getX(), getY(), true);
+			} else {
+				g.insertCell(getX(), getY(), false);
+			}
+		} else if (getValue() == '*') { 
+			if(amount < 2) {
+				g.insertCell(getX(), getY(), false);
+			} else if(amount == 2 || amount == 3) {
+				g.insertCell(getX(), getY(), true);
+			} else if(amount > 3) {
+				g.insertCell(getX(), getY(), false);
+			} else {
+				System.out.println("ERRO. Condição de vida inválida.");
+			}
 		} else {
-			System.out.println("ERRO. Condição de vida inválida.");
+			System.out.println("ERRO. Valor da celula em vida inválido.");
 		}
 	}
 
