@@ -1,6 +1,9 @@
 package gameOfLife;
 
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
+import jade.core.behaviours.CyclicBehaviour;
+import jade.core.behaviours.ThreadedBehaviourFactory;
 
 public class Cell extends Agent{
 
@@ -10,37 +13,54 @@ public class Cell extends Agent{
 	private char value;
 
 	protected void setup() {
-
+		System.out.println("Entrou aqui.");
+		ThreadedBehaviourFactory tbf = new ThreadedBehaviourFactory();
+		Behaviour cell = new MyCyclicBehaviour(this);
+		addBehaviour(tbf.wrap(cell));
 	}
 
-	public Cell(int x,int y, char value) {
-		setX(x);
-		setY(y);
-		setValue(value);
+	//Comportamento CyclicBehaviour
+	class MyCyclicBehaviour extends CyclicBehaviour{
+		
+		private static final long serialVersionUID = 1L;
+		
+		public MyCyclicBehaviour(Agent a) {
+	        super(a);
+	    }
+	 
+	    public void action() {
+			Game g = new Game();
+			int amount = g.checkNeighbors(getX(), getY());
+			makeChange(g, amount);
+	    }
+	}	
+	
+	public synchronized void makeChange(Game g, int amount) {
+		g.insertCell(getX(), getY(), life(amount));
 	}
-
-	public void life() {
-		Game g = new Game();
-		int amount = g.checkNeighbors(getX(), getY());
+	
+	public boolean life(int amount) {
+		boolean status = false;
 		if(getValue() == '-') {
 			if(amount == 3) {
-				g.insertCell(getX(), getY(), true);
+				status = true;
 			} else {
-				g.insertCell(getX(), getY(), false);
+				status = false;
 			}
 		} else if (getValue() == '*') { 
 			if(amount < 2) {
-				g.insertCell(getX(), getY(), false);
+				status = false;
 			} else if(amount == 2 || amount == 3) {
-				g.insertCell(getX(), getY(), true);
+				status = true;
 			} else if(amount > 3) {
-				g.insertCell(getX(), getY(), false);
+				status = false;
 			} else {
 				System.out.println("ERRO. Condição de vida inválida.");
 			}
 		} else {
 			System.out.println("ERRO. Valor da celula em vida inválido.");
 		}
+		return status;
 	}
 
 	public int getX() {
@@ -66,5 +86,16 @@ public class Cell extends Agent{
 		} else {
 			System.out.println("ERRO, TENTATIVA DE INSERIR VALOR INVÁLIDO.");
 		}
+	}
+	
+	public Cell(int x,int y, char value) {
+		setX(x);
+		setY(y);
+		setValue(value);
+	}
+	public Cell() {
+		setX(0);
+		setY(0);
+		setValue('-');
 	}
 }
