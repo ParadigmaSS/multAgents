@@ -11,11 +11,13 @@ public class Cell extends Agent{
 	private int x;
 	private int y;
 	private char value;
+	private Game game;
 
 	protected void setup() {
-		System.out.println("Entrou aqui.");
+		System.out.println("Agente iniciado.");
 		ThreadedBehaviourFactory tbf = new ThreadedBehaviourFactory();
 		Behaviour cell = new MyCyclicBehaviour(this);
+		cell.action();
 		addBehaviour(tbf.wrap(cell));
 	}
 
@@ -29,14 +31,14 @@ public class Cell extends Agent{
 	    }
 	 
 	    public void action() {
-			Game g = new Game();
-			int amount = g.checkNeighbors(getX(), getY());
-			makeChange(g, amount);
+			int amount = getGame().checkNeighbors(getX(), getY());
+			makeChange(amount);
 	    }
 	}	
 	
-	public synchronized void makeChange(Game g, int amount) {
-		g.insertCell(getX(), getY(), life(amount));
+	// This method is call only when all cells verify his neighbors. 
+	public synchronized void makeChange( int amount) {
+		getGame().insertCell(getX(), getY(), life(amount));
 	}
 	
 	public boolean life(int amount) {
@@ -62,7 +64,31 @@ public class Cell extends Agent{
 		}
 		return status;
 	}
+	
+	// Constructor
+	public Cell(int x,int y, char value) {
+		setX(x);
+		setY(y);
+		setValue(value);
+	}
+	public Cell() {
+		setX(0);
+		setY(0);
+		setValue('-');
+	}
+	
+	public Cell(Game game) {
+		setGame(game);
+	}
+	
+	public Cell(int x, int y, char value, Game game) {
+		setX(x);
+		setY(y);
+		setValue(value);
+		setGame(game);
+	}
 
+	// Getters and Setters
 	public int getX() {
 		return x;
 	}
@@ -88,14 +114,10 @@ public class Cell extends Agent{
 		}
 	}
 	
-	public Cell(int x,int y, char value) {
-		setX(x);
-		setY(y);
-		setValue(value);
+	public Game getGame() {
+		return game;
 	}
-	public Cell() {
-		setX(0);
-		setY(0);
-		setValue('-');
+	public void setGame(Game game) {
+		this.game = game;
 	}
 }

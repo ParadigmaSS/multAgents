@@ -43,11 +43,21 @@ public class Game {
 		}
 		System.out.println();
 	}
+	
+	// Initialize matrix with deadCells.
+	public void initializeBoard() {
+		Cell[][] aux = new Cell[getWidth()][getHeight()];
+		this.board = aux;
+		for(int i=0;i<getWidth();i++) {
+			for(int j=0;j<getHeight();j++) {
+				insertCell(i, j,false);
+			}
+		}
+	}
 
 	// Insert value to an cell, where true is an alive cell and false a dead cell.
 	public void insertCell(int x, int y, boolean value) {
 		char cell = 'x';
-		cell = getCell(x,y).getValue();
 		if (value == true) {
 			cell = '*';
 		} else {
@@ -75,17 +85,6 @@ public class Game {
 		}
 
 		return 	alive;
-	}
-
-	// Initialize matrix with deadCells.
-	public void initializeBoard() {
-		Cell[][] aux = new Cell[getWidth()][getHeight()];
-		this.board = aux;
-		for(int i=0;i<getWidth();i++) {
-			for(int j=0;j<getHeight();j++) {
-				setCell(i, j,'-');
-			}
-		}
 	}
 
 	// Return a char of an specific position of matrix.
@@ -138,7 +137,7 @@ public class Game {
 				neighborsAmount++; 
 			}
 		} else {
-			System.out.println("Borda");
+			// Nothing to do.
 		}
 
 		return neighborsAmount;

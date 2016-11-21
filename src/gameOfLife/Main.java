@@ -6,8 +6,8 @@ public class Main {
 		Game g = new Game(10,10);
 		g.initializeBoard();
 		g.printBoard();
-		Cell cell = new Cell();
+		Cell cell = new Cell(g);
 		cell.setup();
-		System.out.println("Saiu do Ciclo.");
+		System.out.println("Programa finalizado.");
 	}
 }
