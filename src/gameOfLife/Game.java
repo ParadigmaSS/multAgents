@@ -60,8 +60,10 @@ public class Game {
 		char cell = 'x';
 		if (value == true) {
 			cell = '*';
-		} else {
+		} else if (value == false) {
 			cell = '-';
+		} else {
+			System.out.println("ERRO, valor invalido de valor na inserção de Célula.");
 		}
 		setCell(x,y,cell);
 	}

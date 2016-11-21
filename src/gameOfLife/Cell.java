@@ -21,7 +21,7 @@ public class Cell extends Agent{
 		addBehaviour(tbf.wrap(cell));
 	}
 
-	//Comportamento CyclicBehaviour
+	// Comportamento CyclicBehaviour
 	class MyCyclicBehaviour extends CyclicBehaviour{
 		
 		private static final long serialVersionUID = 1L;
@@ -29,10 +29,15 @@ public class Cell extends Agent{
 		public MyCyclicBehaviour(Agent a) {
 	        super(a);
 	    }
-	 
+		
 	    public void action() {
+	    	System.out.println("Inside Action.");
 			int amount = getGame().checkNeighbors(getX(), getY());
-			makeChange(amount);
+			if (countNeighborsVerification(amount)) {
+				makeChange(amount);
+			} else {
+				// Nothing to do.
+			}
 	    }
 	}	
 	
@@ -41,9 +46,23 @@ public class Cell extends Agent{
 		getGame().insertCell(getX(), getY(), life(amount));
 	}
 	
+	// Lock to able change.
+	public boolean countNeighborsVerification(int amount) {
+		boolean status = false;
+		int totalOfCells = 0;
+		totalOfCells = getGame().getWidth() * getGame().getHeight();
+		System.out.println(totalOfCells);
+		if(amount == totalOfCells) {
+			status = true;
+		} else {
+			status = false;
+		}
+		return status;
+	}
+	
 	public boolean life(int amount) {
 		boolean status = false;
-		if(getValue() == '-') {
+		if(getValue() == '-' || getValue() == '\0') {
 			if(amount == 3) {
 				status = true;
 			} else {
@@ -70,6 +89,7 @@ public class Cell extends Agent{
 		setX(x);
 		setY(y);
 		setValue(value);
+		setGame(getGame());
 	}
 	public Cell() {
 		setX(0);
