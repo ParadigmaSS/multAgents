@@ -3,7 +3,7 @@ package gameOfLife;
 public class Main {
 
 	public static void main(String[] args) {
-		Game g = new Game();
+		Game g = new Game(10,10);
 		//b.printBoard();
     //System.out.println();
     g.initializeBoard();

@@ -5,17 +5,31 @@ public class Game {
 	private int height = 9;
 	private char[][] board;
 
+  public Game(int width, int height) {
+    setWidth(width);
+    setHeight(height);
+  }
+
   // Print all Board.
 	public void printBoard() {
+
+    // Print index of colums.
+    System.out.print("  ");
+    for(int k=0;k <getWidth();k++) {
+      System.out.print(k + " ");
+    }
+    System.out.println();
+
+    // Print matrix.
 		for(int i = 0; i < getWidth(); i++) {
 			// Print index in lines.
-			System.out.print(1 + " ");
+			System.out.print(i + " ");
 			for(int j = 0; j < getHeight(); j++) {
         // Get content of board matrix to print it.
         System.out.print(getCell(i,j));
         System.out.print(" ");
 			}
-			System.out.println(" " + i);
+			System.out.println(i);
 		}
 	}
 
@@ -30,11 +44,11 @@ public class Game {
     }
     setCell(x,y,cell);
   }
-
+  // Insert an alive cell for default.
   public void insertCell(int x, int y) {
    setCell(x,y,'*');
   }
-	
+
   // Verify the status of an cell.
 	public boolean isAlive(int x, int y) {
 		boolean alive = false;
@@ -50,56 +64,6 @@ public class Game {
     }
 
 		return 	alive;
-	}
-	
-  // Return amount of all alive neighbors of an specific cell.
-	public int checkNeighbors(int x, int y) {
-		int neighborsAmount = 0;
-    boolean verifyCell = false;
-
-    verifyCell = isAlive(x-1,y-1);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-    verifyCell = isAlive(x,y-1);
-    if(verifyCell) {
-      neighborsAmount++;
-    }
-
-    verifyCell = isAlive(x+1,y-1);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-
-    verifyCell = isAlive(x-1,y);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-    verifyCell = isAlive(x,y);
-    if(verifyCell) {
-      neighborsAmount++;
-    }
-
-    verifyCell = isAlive(x+1,y);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-
-    verifyCell = isAlive(x-1,y+1);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-    verifyCell = isAlive(x,y+1);
-    if(verifyCell) {
-      neighborsAmount++;
-    }
-
-    verifyCell = isAlive(x+1,y+1);
-    if(verifyCell) {
-      neighborsAmount++; 
-    }
-
-		return neighborsAmount;
 	}
   
   // Initialize matrix with deadCells.
@@ -118,6 +82,7 @@ public class Game {
   public char getCell(int x, int y) {
     return this.board[x][y];
   }
+  // Insert the value of dead '-' or alive '*' to a cell.
   public void setCell(int x, int y, char cell) {
     if(cell == '-' || cell == '*') {
       this.board[x][y] = cell;
@@ -125,6 +90,54 @@ public class Game {
       System.out.println("ERRO, TENTATIVA DE INSERIR VALOR INVÁLIDO.");
     }
   }
+
+  // Return amount of all alive neighbors of an specific cell.
+  public int checkNeighbors(int x, int y) {
+    int neighborsAmount = 0;
+    boolean verifyCell = false;
+
+    verifyCell = isAlive(x-1,y-1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y-1);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+    verifyCell = isAlive(x+1,y-1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
+    verifyCell = isAlive(x-1,y);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+    verifyCell = isAlive(x+1,y);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
+    verifyCell = isAlive(x-1,y+1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+    verifyCell = isAlive(x,y+1);
+    if(verifyCell) {
+      neighborsAmount++;
+    }
+    verifyCell = isAlive(x+1,y+1);
+    if(verifyCell) {
+      neighborsAmount++; 
+    }
+
+    return neighborsAmount;
+  }
+
   // Getters and Setters.
 	public int getWidth() {
 		return width;
