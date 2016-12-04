@@ -8,10 +8,17 @@ public class Cell extends Agent{
 	private boolean alive = false;
 
 	// Constructors.
+	// Empty.
+	public Cell() {
+		setX(0);
+		setY(0);
+		setAlive(false);
+	}
 	// Make a dead cell.
 	public Cell(int x, int y) {
 		setX(x);
 		setY(y);
+		setAlive(false);
 	}
 	// Make a cell dead or alive.
 	public Cell(int x, int y, boolean alive) {
@@ -20,14 +27,25 @@ public class Cell extends Agent{
 		setAlive(alive);
 	}
 	
+// ----------------------------------------------------------------------------
 	// Agents
 	public void setup() {
+		System.out.println("Method setup started.");
+		
+		Cell[][] board = null;
+		int width = 9;
+		int height = 9;
+		board = initializeBoard(board, width, height);
+		printBoard(board, width, height);
+		
 		try {
 			
 		} catch (Exception e) {
 			System.out.println("ERRO. setup() of Cell.");
 		}
+		System.out.println("End of setup.");
 	}
+// ----------------------------------------------------------------------------
 	
 	// Return the amount of neighbors alive.	
 	public int neighborsAlive(Cell cell) {
@@ -83,12 +101,47 @@ public class Cell extends Agent{
 			amountOfNeighborsAlive++;
 		}
 		
+		// Verification.
 		System.out.println("Neighbors alive of cell: " 
 		+ cell.getX() + " " + getY() + " = " + amountOfNeighborsAlive);
 		
 		return amountOfNeighborsAlive;
 	}
 
+	// Create a matrix of dead Cells. 
+	public Cell[][] initializeBoard(Cell[][] board, int width, int height) {
+		board = new Cell[width][height];
+		for(int i=0;i<width;i++) {
+			for(int j=0;j<height;j++) {
+				board[i][j] = new Cell();
+			}
+		}
+		return board;
+	}
+	
+	public void printBoard(Cell[][] board, int width, int height) {
+		for(int i=0;i<width;i++) {
+			for(int j=0;j<height;j++) {
+				System.out.print(showStatus(board[i][j]) + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	// If cell is alive print '*' if cell is dead print '-'.
+	public char showStatus(Cell cell) {
+		char status = ' ';
+		
+		if(cell.getAlive()) {
+			status = '*';
+		} else if (!cell.getAlive()) {
+			status = '-';
+		} else {
+			System.out.println("ERRO. Status of cell wrong.");
+		}
+		
+		return status;
+	}
 
 	// Getters and Setters.
 	public int getX() {
