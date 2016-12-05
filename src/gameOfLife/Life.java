@@ -51,12 +51,23 @@ public class Life extends Agent {
 //		neighborsAlive(board,1,1);
 		
 		try {
+			
 			addBehaviour(new CyclicBehaviour(this) {
-				
+				Integer i=0;
 				@Override
 				public void action() {
+					// Apply life to cells.
 					setBoard(life(getBoard(), getWidth(), getHeight()));
+					// Print the result.
 					printBoard(getBoard(), getWidth(), getHeight());
+					// Sleep for 1 second.
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					System.out.println("Gneration: " + i++);
+					System.out.println("#################");
 				}
 			});
 		} catch (Exception e) {
