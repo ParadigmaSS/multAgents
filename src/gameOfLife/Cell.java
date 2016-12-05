@@ -1,10 +1,7 @@
 package gameOfLife;
 
-import jade.core.Agent;
+public class Cell {
 
-public class Cell extends Agent{
-
-	private static final long serialVersionUID = 1L;
 	private int x = 0;
 	private int y = 0;
 	private boolean alive = false;
@@ -29,11 +26,6 @@ public class Cell extends Agent{
 		setAlive(alive);
 	}
 	
-// ----------------------------------------------------------------------------
-	// Agents
-	public void setup() {
-	}
-// ----------------------------------------------------------------------------
 	// Getters and Setters.
 	public int getX() {
 		return x;

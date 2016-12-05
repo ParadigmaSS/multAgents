@@ -7,25 +7,13 @@ public class Life extends Agent {
 
 	private static final long serialVersionUID = 1L;
 	private Cell[][] board = null;
-	private int width = 20;
-	private int height = 20;
+	private int width = 21;
+	private int height = 21;
 	
 	// Constructors.
 	// Empty.
 	public Life() {
 		setBoard(null);
-	}
-	
-	public Life(Cell[][] board, int width, int height) {
-		setBoard(board);
-		setWidth(width);
-		setHeight(height);
-	}
-	
-	public Life(int width, int height) {
-		setBoard(null);
-		setWidth(width);
-		setHeight(height);
 	}
 	
 // ----------------------------------------------------------------------------
@@ -39,24 +27,14 @@ public class Life extends Agent {
 		getBoard()[2][3].setAlive(true);
 		getBoard()[2][4].setAlive(true);
 		
-//		getBoard()[5][5].setAlive(true);
-//		getBoard()[6][5].setAlive(true);
-//		getBoard()[7][6].setAlive(true);
-//		getBoard()[6][7].setAlive(true);
-//		getBoard()[5][7].setAlive(true);
-//		getBoard()[4][6].setAlive(true);
-//		getBoard()[4][5].setAlive(true);
-//		printBoard(getBoard(), getWidth(), getHeight());
-//		setBoard(life(getBoard(), getWidth(), getHeight()));
-//		printBoard(getBoard(), getWidth(), getHeight());
-//		setBoard(life(getBoard(), getWidth(), getHeight()));
-//		printBoard(getBoard(), getWidth(), getHeight());
-//		// Tests
-//		
-//		neighborsAlive(board,1,1);		
-//		getBoard()[2][2].setAlive(true);
-//		printBoard(board, width, height);
-//		neighborsAlive(board,1,1);
+		getBoard()[5][5].setAlive(true);
+		getBoard()[5][6].setAlive(true);
+		getBoard()[6][7].setAlive(true);
+		getBoard()[7][6].setAlive(true);
+		getBoard()[7][5].setAlive(true);
+		getBoard()[6][4].setAlive(true);
+		
+		getBoard()[7][7].setAlive(true);
 		
 		try {
 			
@@ -74,11 +52,7 @@ public class Life extends Agent {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					System.out.println("Gneration: " + i++);
-					
-					for(int k=0;k<getWidth();k++) {
-						System.out.print("#");
-					} System.out.println();
+					System.out.println("                     ##### Gneration: " + i++ + " #####");
 				}
 			});
 		} catch (Exception e) {
@@ -87,41 +61,33 @@ public class Life extends Agent {
 		System.out.println("End Life.");
 	}
 // ----------------------------------------------------------------------------
-	// Life.
+	
+	// Logic of life.
 	public Cell[][] life(Cell[][] board, int width, int height) {
 		Cell[][] generation = null;
 		generation = initializeBoard(generation, width, height);
-		
+
+		// Verify all Cells.
 		for(int i=0;i<height;i++) {
 			for(int j=0;j<height;j++) {
-				//System.out.println(i + " " + j);
 				// Die of loneliness.
 				if(neighborsAlive(board,i,j) < 2) {
 					generation[i][j].setAlive(false);
-					//System.out.print("<2 ");
 				// Keep be alive.
 				} else if((neighborsAlive(board,i,j) == 2) && board[i][j].getAlive() == true) {
 					generation[i][j].setAlive(true);
-					//System.out.println("alive ");
 				// Back to live.
 				} else if (neighborsAlive(board,i,j) == 3 && board[i][j].getAlive() == true) {
 					generation[i][j].setAlive(true);
-					//System.out.println("alive ");
 				} else if ((neighborsAlive(board,i,j) == 3) && board[i][j].getAlive() == false) {
 					generation[i][j].setAlive(true);
-					//System.out.println("Respaw ");
 				// Die of super population.
 				} else if (neighborsAlive(board,i,j) > 3) {
 					generation[i][j].setAlive(false);
-					//System.out.println(">3 ");
-				// Erro.
-				} else {
-					//System.out.println(neighborsAlive(board, i, j));
-					//System.out.println(i + " " + j);
-					//System.out.println("ERRO. Life not working well.");
 				}
 			}
 		}
+		
 		return generation;
 	}
 	// Return the amount of neighbors alive.	
@@ -134,56 +100,64 @@ public class Life extends Agent {
 		
 		// Cell aux to check if the neighbor is alive.
 		Cell neighbor = null;
-		if((x > 0 && x < 8) && (y > 0 && y < 8)) {
+		//if((x > 0 && x < getWidth()) && (y > 0 && y < getHeight())) {
 			// Up, left neighbor.
-			neighbor = board[cellX-1][cellY-1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellX-1 >= 0 && cellY-1 >= 0) {
+				neighbor = board[cellX-1][cellY-1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			// Up neighbor.
-			neighbor = board[cellX][cellY-1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellY-1 >= 0) {
+				neighbor = board[cellX][cellY-1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			// Up, right neighbor.
-			neighbor = board[cellX+1][cellY-1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellX+1 < getWidth() && cellY-1 >= 0) {
+				neighbor = board[cellX+1][cellY-1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
-			
 			// Left neighbor.
-			neighbor = board[cellX-1][cellY];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellX-1 >= 0) {
+				neighbor = board[cellX-1][cellY];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			// Right neighbor.
-			neighbor = board[cellX+1][cellY];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellX+1 < getWidth()) {
+				neighbor = board[cellX+1][cellY];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			
-			// Down, left neighbor.	
-			neighbor = board[cellX-1][cellY+1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			// Down, left neighbor.
+			if(cellX-1 >= 0 && cellY+1 < getHeight()) {
+				neighbor = board[cellX-1][cellY+1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			// Down neighbor.
-			neighbor = board[cellX][cellY+1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellY+1 < getHeight()) {
+				neighbor = board[cellX][cellY+1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
 			// Down, right neighbor.
-			neighbor = board[cellX+1][cellY+1];
-			if(neighbor.getAlive()) {
-				amountOfNeighborsAlive++;
+			if(cellX+1 < getWidth() && cellY+1 < getHeight()) {
+				neighbor = board[cellX+1][cellY+1];
+				if(neighbor.getAlive()) {
+					amountOfNeighborsAlive++;
+				}
 			}
-		} else {
-			//System.out.println("Dont verifyng edges.");
-		}
-		
-		// Verification.
-		//System.out.println("Neighbors alive of cell: " 
-		//+ board[x][y].getX() + "," + board[x][y].getX() + " = " + amountOfNeighborsAlive);
 		
 		return amountOfNeighborsAlive;
 	}
@@ -201,16 +175,27 @@ public class Life extends Agent {
 	
 	// Print the matrix of cells.
 	public void printBoard(Cell[][] board, int width, int height) {
-		for(int i=0;i<width;i++) {
-			for(int j=0;j<height;j++) {
-				System.out.print(showStatus(getBoard()[i][j]) + " ");
+		System.out.print("   ");
+		for(int k=0;k<getWidth();k++) {
+			if(k<10) {
+				System.out.print(k + "  ");
+			} else {
+				System.out.print(k + " ");
 			}
+		}
+		System.out.println();
+		for(int i=0;i<width;i++) {
+			if(i<10) {
+				System.out.print(i + "  ");
+			} else {
+				System.out.print(i + " ");
+			}
+			for(int j=0;j<height;j++) {
+				System.out.print(showStatus(getBoard()[i][j]) + "  ");
+			}
+			System.out.print(" " + i);
 			System.out.println();
 		}
-		// Print any '#'.
-		for(int k=0;k<getWidth();k++) {
-			System.out.print("#");
-		} System.out.println();
 	}
 	
 	// If cell is alive print '*' if cell is dead print '-'.
@@ -227,6 +212,7 @@ public class Life extends Agent {
 		
 		return status;
 	}
+
 
 	// Getters and Setters.
 	public Cell[][] getBoard() {
