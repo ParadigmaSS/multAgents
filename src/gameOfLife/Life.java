@@ -1,6 +1,7 @@
 package gameOfLife;
 
 import jade.core.Agent;
+import jade.core.behaviours.CyclicBehaviour;
 
 public class Life extends Agent {
 
@@ -37,19 +38,27 @@ public class Life extends Agent {
 		getBoard()[2][2].setAlive(true);
 		getBoard()[2][3].setAlive(true);
 		getBoard()[2][4].setAlive(true);
-		printBoard(getBoard(), getWidth(), getHeight());
-		setBoard(life(getBoard(), getWidth(), getHeight()));
-		printBoard(getBoard(), getWidth(), getHeight());
-		setBoard(life(getBoard(), getWidth(), getHeight()));
-		printBoard(getBoard(), getWidth(), getHeight());
-		// Tests
+//		printBoard(getBoard(), getWidth(), getHeight());
+//		setBoard(life(getBoard(), getWidth(), getHeight()));
+//		printBoard(getBoard(), getWidth(), getHeight());
+//		setBoard(life(getBoard(), getWidth(), getHeight()));
+//		printBoard(getBoard(), getWidth(), getHeight());
+//		// Tests
+//		
+//		neighborsAlive(board,1,1);		
+//		getBoard()[2][2].setAlive(true);
+//		printBoard(board, width, height);
+//		neighborsAlive(board,1,1);
 		
-		neighborsAlive(board,1,1);		
-		getBoard()[2][2].setAlive(true);
-		printBoard(board, width, height);
-		neighborsAlive(board,1,1);
-		
-		try {			
+		try {
+			addBehaviour(new CyclicBehaviour(this) {
+				
+				@Override
+				public void action() {
+					setBoard(life(getBoard(), getWidth(), getHeight()));
+					printBoard(getBoard(), getWidth(), getHeight());
+				}
+			});
 		} catch (Exception e) {
 			System.out.println("ERRO. setup() of Cell.");
 		}
@@ -71,11 +80,11 @@ public class Life extends Agent {
 				// Keep be alive.
 				} else if((neighborsAlive(board,i,j) == 2) && board[i][j].getAlive() == true) {
 					generation[i][j].setAlive(true);
-					System.out.println("alive ");
+					//System.out.println("alive ");
 				// Back to live.
 				} else if (neighborsAlive(board,i,j) == 3 && board[i][j].getAlive() == true) {
 					generation[i][j].setAlive(true);
-					System.out.println("alive ");
+					//System.out.println("alive ");
 				} else if ((neighborsAlive(board,i,j) == 3) && board[i][j].getAlive() == false) {
 					generation[i][j].setAlive(true);
 					//System.out.println("Respaw ");
