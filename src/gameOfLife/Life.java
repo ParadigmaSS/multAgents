@@ -34,11 +34,12 @@ public class Life extends Agent {
 		getBoard()[7][5].setAlive(true);
 		getBoard()[6][4].setAlive(true);
 		
-		getBoard()[7][7].setAlive(true);
+		//getBoard()[7][7].setAlive(true);
 		
 		try {
 			
 			addBehaviour(new CyclicBehaviour(this) {
+				private static final long serialVersionUID = 1L;
 				Integer i=0;
 				@Override
 				public void action() {
@@ -46,13 +47,18 @@ public class Life extends Agent {
 					setBoard(life(getBoard(), getWidth(), getHeight()));
 					// Print the result.
 					printBoard(getBoard(), getWidth(), getHeight());
-					// Sleep for 1 second.
+					// Sleep for a time
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					System.out.println("                     ##### Gneration: " + i++ + " #####");
+					// Life ends.
+					if(i == 10) {
+						System.out.println("Vida acabou.");
+						doDelete();
+					}
 				}
 			});
 		} catch (Exception e) {
