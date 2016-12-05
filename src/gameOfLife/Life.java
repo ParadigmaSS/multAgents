@@ -7,8 +7,8 @@ public class Life extends Agent {
 
 	private static final long serialVersionUID = 1L;
 	private Cell[][] board = null;
-	private int width = 9;
-	private int height = 9;
+	private int width = 20;
+	private int height = 20;
 	
 	// Constructors.
 	// Empty.
@@ -38,6 +38,14 @@ public class Life extends Agent {
 		getBoard()[2][2].setAlive(true);
 		getBoard()[2][3].setAlive(true);
 		getBoard()[2][4].setAlive(true);
+		
+//		getBoard()[5][5].setAlive(true);
+//		getBoard()[6][5].setAlive(true);
+//		getBoard()[7][6].setAlive(true);
+//		getBoard()[6][7].setAlive(true);
+//		getBoard()[5][7].setAlive(true);
+//		getBoard()[4][6].setAlive(true);
+//		getBoard()[4][5].setAlive(true);
 //		printBoard(getBoard(), getWidth(), getHeight());
 //		setBoard(life(getBoard(), getWidth(), getHeight()));
 //		printBoard(getBoard(), getWidth(), getHeight());
@@ -67,7 +75,10 @@ public class Life extends Agent {
 						e.printStackTrace();
 					}
 					System.out.println("Gneration: " + i++);
-					System.out.println("#################");
+					
+					for(int k=0;k<getWidth();k++) {
+						System.out.print("#");
+					} System.out.println();
 				}
 			});
 		} catch (Exception e) {
@@ -196,7 +207,10 @@ public class Life extends Agent {
 			}
 			System.out.println();
 		}
-		System.out.println("#################");
+		// Print any '#'.
+		for(int k=0;k<getWidth();k++) {
+			System.out.print("#");
+		} System.out.println();
 	}
 	
 	// If cell is alive print '*' if cell is dead print '-'.
