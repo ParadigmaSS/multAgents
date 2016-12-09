@@ -13,6 +13,13 @@ public class Cell extends Agent{
 	private Board board;
 
 	// Constructors.
+	public Cell() {
+		setX(0);
+		setY(0);
+		setAlive(false);
+		setBoard(null);
+	}
+	
 	public Cell(int x, int y) {
 		setX(x);
 		setY(y);
@@ -34,7 +41,7 @@ public class Cell extends Agent{
 
 			@Override
 			public void action() {
-				isAlive(board, x, y);			
+				System.out.println(isAlive(board, x, y));		
 			}
 		});
 		

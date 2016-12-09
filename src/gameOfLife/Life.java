@@ -10,16 +10,35 @@ public class Life extends Agent {
 	private Board board;
 	
 	// Constructors.
+	public Life() {
+		setCell(null);
+		setBoard(null);
+	}
+	public Life(Cell cell, Board board) {
+		setCell(cell);
+		setBoard(board);
+	}
 	
 // ----------------------------------------------------------------------------
 	// Agents
 	public void setup() {
+		final Board board = new Board(5,5);
+		final Cell cell = new Cell();
 		addBehaviour(new CyclicBehaviour() {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void action() {	
+			public void action() {
+				System.out.println("VIDA.");
+				cell.setup(board, 5, 5);
+				board.printBoard(board);
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
