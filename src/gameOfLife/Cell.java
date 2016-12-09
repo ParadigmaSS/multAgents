@@ -1,6 +1,7 @@
 package gameOfLife;
 
 import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
 
 
 public class Cell extends Agent{
@@ -25,11 +26,50 @@ public class Cell extends Agent{
 	}
 
 	// ------------------------------------------------------------------------
-	public void setup(Board board, int x, int y) {
-		neighborsAlive(board, x, y);
+	public void setup(final Board board, final int x, final int y) {
+		
+		addBehaviour(new OneShotBehaviour(this) {
+			
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void action() {
+				isAlive(board, x, y);			
+			}
+		});
+		
+		
 	}
 	// ------------------------------------------------------------------------
-	
+
+	// Logic of life.
+		public boolean isAlive(Board board, int x, int y) {
+			boolean generation = false;
+			
+			// Verify all Cells.
+			for(int i=0;i<board.getHeight();i++) {
+				for(int j=0;j<board.getWidth();j++) {
+					// Die of loneliness.
+					if(neighborsAlive(board,i,j) < 2) {
+						generation = false;
+					// Keep be alive.
+					} else if((neighborsAlive(board,i,j) == 2) && getAlive() == true) {
+						generation = true;
+					// Back to live.
+					} else if (neighborsAlive(board,i,j) == 3 && getAlive() == true) {
+						generation = true;
+					} else if ((neighborsAlive(board,i,j) == 3) && getAlive() == false) {
+						generation = true;
+					// Die of super population.
+					} else if (neighborsAlive(board,i,j) > 3) {
+						generation = false;
+					}
+				}
+			}
+			
+			return generation;
+		}
+		
 	// Return the amount of neighbors alive.	
 	public int neighborsAlive(Board field, int x, int y) {
 		
@@ -99,7 +139,6 @@ public class Cell extends Agent{
 		
 		return amountOfNeighborsAlive;
 	}
-
 	// ------------------------------------------------------------------------
 		
 	// Getters and Setters.
