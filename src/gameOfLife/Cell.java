@@ -1,7 +1,7 @@
 package gameOfLife;
 
 import jade.core.Agent;
-import jade.core.behaviours.OneShotBehaviour;
+import jade.core.behaviours.CyclicBehaviour;
 
 
 public class Cell extends Agent{
@@ -34,17 +34,18 @@ public class Cell extends Agent{
 
 	// ------------------------------------------------------------------------
 	public void setup(final Board board, final int x, final int y) {
+		System.out.println("CÉLULA");
 		
-		addBehaviour(new OneShotBehaviour(this) {
+		addBehaviour(new CyclicBehaviour(this) {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void action() {
-				System.out.println(isAlive(board, x, y));		
+				// TODO Auto-generated method stub
+				System.out.println(isAlive(board, x, y));
 			}
-		});
-		
+		});	
 		
 	}
 	// ------------------------------------------------------------------------
