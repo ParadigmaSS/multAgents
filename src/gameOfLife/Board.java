@@ -3,15 +3,28 @@ package gameOfLife;
 public class Board {
 	// Attributes.
 	private char[][] board = null;
-	private char status = ' ';
 	private int width = 5;
 	private int height = 5;
 	
 	// Constructors.
 	public Board() {
-		setStatus('x');
 		setWidth(5);
 		setHeight(5);
+	}
+	
+	public Board(char[][] board, int width, int height) {
+		setBoard(board);
+		setWidth(width);
+		setHeight(height);
+	}
+	
+	public char[][] initializeBoard(char[][] board, int width, int height) {
+		for(int i=0;i<width;i++) {
+			for(int j=0;j<height;j++) {
+				board[i][j] = '-';
+			}
+		}
+		return board;
 	}
 	
 	// Getters and Setters.
@@ -20,13 +33,6 @@ public class Board {
 	}
 	public void setBoard(char[][] board) {
 		this.board = board;
-	}
-	
-	public char getStatus() {
-		return status;
-	}
-	public void setStatus(char status) {
-		this.status = status;
 	}
 	
 	public int getWidth() {
